@@ -1,0 +1,6 @@
+.scroll {
+  position: sticky;
+  top: 1rem;
+  display: block;
+  align-self: flex-start;
+}
