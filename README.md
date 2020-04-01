@@ -1,6 +1,6 @@
 # YouClone
 
-A YouTube Clone
+A YouTube Clone in React
 
 This is a clone of YouTube's basic functionality written in React. This app is not currently hosted anywhere - it was written to practice manipulating data from external APIs and sending data from child components upstream to the parent.
 
