@@ -11,10 +11,12 @@ class App extends React.Component {
 
   contextRef = React.createRef();
 
+  // When the page loads for the first time, run a search with an empty search term
   componentDidMount() {
     this.onTermSubmit("");
   }
 
+  // Run a search with the search term provided by SearchBar.js
   onTermSubmit = term => {
     axios
       .get("http://localhost:3001/search", {
@@ -32,12 +34,12 @@ class App extends React.Component {
       .catch(err => console.log(err));
   };
 
+  // Set state with a video from VideoItem/VideoList. This part of state is used by VideoDetail
   onVideoSelect = video => {
     this.setState({ selectedVideo: video });
   };
 
   render() {
-    console.log(this.state.videos);
     return (
       <div>
         <>
