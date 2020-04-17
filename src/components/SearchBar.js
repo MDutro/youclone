@@ -1,32 +1,31 @@
-import React from "react";
+import React, {useState} from "react";
 import { Segment, Form } from "semantic-ui-react";
 
-class SearchBar extends React.Component {
-  state = { term: "" };
+const SearchBar = (props) => {
+  const [term, setTerm] = useState("")
 
-  onFormSubmit = event => {
+  const onFormSubmit = event => {
     event.preventDefault();
 
-    this.props.onFormSubmit(this.state.term);
+    props.onFormSubmit(term);
   };
 
-  render() {
-    return (
-      <Segment className="ui segment">
-        <Form onSubmit={this.onFormSubmit} className="ui form">
-          <Form.Field className="field">
-            <label>Video Search</label>
-            <input
-              type="text"
-              value={this.state.term}
-              onChange={e => this.setState({ term: e.target.value })}
-              placeholder="Enter search term"
-            />
-          </Form.Field>
-        </Form>
-      </Segment>
-    );
-  }
+  return (
+    <Segment className="ui segment">
+      <Form onSubmit={onFormSubmit} className="ui form">
+        <Form.Field className="field">
+          <label>Video Search</label>
+          <input
+            type="text"
+            value={term}
+            onChange={e => setTerm(e.target.value)}
+            placeholder="Enter search term"
+          />
+        </Form.Field>
+      </Form>
+    </Segment>
+  );
 }
+
 
 export default SearchBar;
