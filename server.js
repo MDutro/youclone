@@ -1,9 +1,9 @@
 require("dotenv").config();
 const express = require("express");
 const axios = require("axios");
-const app = express();
-const KEY = process.env.KEY;
 const cors = require("cors");
+const app = express();
+const API_KEY = process.env.KEY;
 const unescape = require("lodash.unescape");
 
 app.use(cors());
@@ -15,8 +15,10 @@ The easiest way to deal with this problem is to use the unescape function of the
 This axios request takes the response.data object and uses map to run unescape over the title of every YouTube video
 in the search results before passing the data object to the React front end.
 */
+
+// 
 app.get("/search", (req, res) => {
-  const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResults=50&key=${KEY}&q=${req.query.q}`;
+  const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=50&type=video&key=${API_KEY}&q=${req.query.q}`;
   axios
     .get(url)
     .then(response => response.data)

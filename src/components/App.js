@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import "./App.css";
 import { Container, Segment, Grid, Image, Header } from "semantic-ui-react";
 import SearchBar from "./SearchBar";
@@ -7,20 +7,16 @@ import VideoDetail from "./VideoDetail";
 import axios from "axios";
 
 const App = () => {
-  // state = { videos: [], selectedVideo: null };
   const [videos, setVideos] = useState({videos: [], selectedVideo: ""})
 
   // contextRef = React.createRef();
 
-  // When the page loads for the first time, run a search with an empty search term
-  // componentDidMount() {
-  //   this.onTermSubmit("");
-  // }
+  
 
   
 
   // Run a search with the search term provided by SearchBar.js
-  const onTermSubmit = term => {
+  const onTermSubmit = useCallback(term => {
     axios
       .get("http://localhost:3001/search", {
         params: {
@@ -29,15 +25,16 @@ const App = () => {
       })
       .then(response => response.data)
       .then(response =>
-        setVideos({ ...videos,
+        setVideos(vids => ({ ...vids,
           videos: response,
           selectedVideo: response[0]
-        })
+        }))
       )
       .catch(err => console.log(err));
-  };
-  
-  useEffect(onTermSubmit(""), [])
+  }, [])
+
+  // When the page loads for the first time, run a search with an empty search term
+  useEffect(() => onTermSubmit(""), [onTermSubmit])
 
   // Set state with a video from VideoItem/VideoList. This part of state is used by VideoDetail
   const onVideoSelect = video => {
