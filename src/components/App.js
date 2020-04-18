@@ -38,7 +38,7 @@ const App = () => {
 
   // Set state with a video from VideoItem/VideoList. This part of state is used by VideoDetail
   const onVideoSelect = video => {
-    setVideos({ selectedVideo: video });
+    setVideos({ ...videos, selectedVideo: video });
   };
 
   return (
